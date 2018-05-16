@@ -6,21 +6,14 @@ using AmpPhysic.RigidBodies;
 namespace AmpPhysic
 {
     public interface IPhysic
-    {
-        //double Weight { get; set; }
+    {        
 
         Vector3D Velocity { get; set;  }
-        Vector3D SelfRotation { get; set; }
-        Vector3D Force { get; }
-        Vector3D CenterOfMass { get; }
-        Point3D CenterPosition { get; }
+        Vector3D AngularRadVelocity { get; set; }
+        Vector3D AngularPosition { get; set; }   
+        Point3D CenterPosition { get; set; }
 
-        double Mass { get; }
-
-        void UpdateForce();
-
-        void AddForce(Force force);
-
-        void Move(float deltaTime);
+        double Mass { get; set; }
+        
     }
 }

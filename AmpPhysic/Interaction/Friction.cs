@@ -19,7 +19,7 @@ namespace AmpPhysic.Interaction
         {
             // T = fmgcosA
             return
-                new Force(FrictionFactor * HitForce);
+                new Force(FrictionFactor, HitForce);
         }
 
     }

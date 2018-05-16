@@ -9,7 +9,6 @@ namespace AmpPhysic
     public class VirtualWorld
     {
         private List<GameObject> GameObjects;
-        private List<IPhysic> PhysicObjects;
 
         private int PRECISION_3D_PER_ONE_UNIT_SIZE = 12; // min. to look nice 12
 
@@ -18,7 +17,6 @@ namespace AmpPhysic
         public VirtualWorld(int MeshPrecision = 12)
         {
             GameObjects = new List<GameObject>();
-            PhysicObjects = new List<IPhysic>();
 
             Responser = new CollisionResponser();
             PRECISION_3D_PER_ONE_UNIT_SIZE = MeshPrecision;
@@ -28,13 +26,7 @@ namespace AmpPhysic
         {
             return this.Responser;
         }
-
-
-        /*public void AddObject(IControlledObject Object)
-        {
-            ControlledObjects.Add(Object);
-        }
-        */
+        
 
         public void AddObject(GameObject anObject)
         {
@@ -46,33 +38,76 @@ namespace AmpPhysic
             return null;
         }
 
-        public void Animate(float deltaTime)
+        private IEnumerable<GameObject> GetPhysicGameObjects()
+        {
+            // TODO: Speed up with cache in the future
+            return GameObjects.Where(x => x.CalculatePhysicYesNo);
+        }
+
+        private IEnumerable<GameObject> GetCollisableGameObjects()
+        {
+            // TODO: Speed up with cache in the future
+            return GameObjects.Where(x => x.CalculateCollisionsYesNo);
+        }
+
+        /**
+         * <summary>
+         * This is a separated from the Animate, because Animate executes recursively and is time consumpting
+         * AnimateGravity can be executed once other calcultion in the frame are finished
+         * </summary>
+         */
+        private void AnimateGravity()
         {
 
-            // Calculate forces which affects velocity
-            /*foreach (var ControlledObject in GameObjects.Where(x => x.CalculatePhysicYesNo))
-            {
-                ControlledObject.Animate(deltaTime);
-            }*/
+        }
+
+        /**
+         * <summary>
+         * This is the main VirtualWorld procedure, which starts to moving all the required objects
+         * Tries to find the first collision or no collision and animates the objects
+         * </summary>
+         */
+        public void Animate(float deltaTime)
+        {            
 
             // Generate movements
-            foreach (var ControlledObject in GameObjects.Where( x => x.CalculatePhysicYesNo))
-            {
-                ControlledObject.Animate(deltaTime);
+            foreach (var ControlledObject in GetPhysicGameObjects())
+            {                
+                ControlledObject.CalculateDisplacement(deltaTime);
             }
 
             // Generate the fastest collision
-            /*float fastestCollisionTime = deltaTime;
-            foreach (var ControlledObject in GameObjects.Where(x => x.CalculateCollisionsYesNo))
+            float fastestCollisionTime = deltaTime;
+            foreach (var ControlledObject in GetCollisableGameObjects())
             {
-                ControlledObject.Animate(deltaTime);
+                //ControlledObject.Animate(deltaTime);
             }
 
-            // Recursively do the same
-            deltaTime = deltaTime - fastestCollisionTime;
-            if (deltaTime > 0)
+            // commit the first collision
+            // ...
+
+
+            // When we have collision, animate only to the first one 
+            // and recursively do the same
+            if (deltaTime != fastestCollisionTime)
+            {
+                // Commit the movement
+                foreach (var ControlledObject in GetPhysicGameObjects())
+                {
+                    ControlledObject.CommitDisplacementPartially(fastestCollisionTime, deltaTime);
+                }
+
                 Animate(deltaTime);
-                */
+
+            }            
+
+            // Commit the movement
+            foreach (var ControlledObject in GetPhysicGameObjects())
+            {
+                ControlledObject.CommitDisplacement();
+            }
+
+            AnimateGravity();
         }
     }
 }

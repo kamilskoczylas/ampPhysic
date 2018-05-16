@@ -4,7 +4,7 @@ using AmpPhysic.Graphic;
 
 namespace AmpPhysic.RigidBodies
 {
-    class PhysicWheel : PhysicSphere
+    class PhysicWheel : PhysicPoint
     {
         double WheelDirectionInRad;
 
@@ -18,7 +18,7 @@ namespace AmpPhysic.RigidBodies
             this.WheelDirectionInRad = WheelDirectionInRad;
         }
 
-        protected override void CalculateVelocity()
+        /*protected override void CalculateVelocity()
         {
             UpdateForce();
 
@@ -27,6 +27,6 @@ namespace AmpPhysic.RigidBodies
 
             // don't add velocity vector of normal of last collision 
             _Velocity += Force / Mass;
-        }        
+        } */     
     }
 }

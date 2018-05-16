@@ -67,13 +67,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StaticPhysicPoint.feature.cs">
+    <Compile Include="PointKinematics.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>StaticPhysicPoint.feature</DependentUpon>
+      <DependentUpon>PointKinematics.feature</DependentUpon>
     </Compile>
-    <Compile Include="StaticPhysicPointSteps.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PointStatics.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointStatics.feature</DependentUpon>
+    </Compile>
+    <Compile Include="PointStaticsSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -81,6 +86,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="PointKinematics.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PointKinematics.feature.cs</LastGenOutput>
+    </None>
     <None Include="runtests.cmd" />
     <None Include="SpecRunTestProfile.xsd">
       <SubType>Designer</SubType>
@@ -88,9 +97,9 @@
     <None Include="SpecRunTestProfile_2011_09.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="StaticPhysicPoint.feature">
+    <None Include="PointStatics.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>StaticPhysicPoint.feature.cs</LastGenOutput>
+      <LastGenOutput>PointStatics.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

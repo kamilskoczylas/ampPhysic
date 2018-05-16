@@ -2,13 +2,14 @@
 using TechTalk.SpecFlow;
 using AmpPhysic;
 using AmpPhysic.RigidBodies;
+using AmpPhysic.Interaction;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Windows.Media.Media3D;
 
 namespace AmpPhysicTests
 {
     [Binding]
-    public class StaticPhysicPointSteps
+    public class PointStaticsSteps
     {
         private VirtualWorld World = new VirtualWorld();
         //private PhysicPoint bodyA;
@@ -17,14 +18,16 @@ namespace AmpPhysicTests
         [Given(@"A point in position (.*), (.*), (.*)")]
         public void GivenAPointInPosition(int p0, int p1, int p2)
         {
-            PointA = new GameObject(new PhysicPoint(1, new Point3D(p0, p1, p2)));            
+            PointA = new GameObject(new KinematicBody());
+            PointA.SetPosition(p0, p1, p2);
+
             World.AddObject(PointA);
         }
         
         [Given(@"Its velocity is (.*), (.*), (.*)")]
         public void GivenItsVelocityIs(int p0, int p1, int p2)
         {
-            PointA.SetInitialVelocity(new Vector3D(p0, p1, p2));            
+            PointA.SetInitialVelocity(p0, p1, p2);            
         }
 
         [When(@"(.*) second passes")]
@@ -32,7 +35,16 @@ namespace AmpPhysicTests
         {           
             World.Animate(p0);
         }
-        
+
+        [Given(@"There is a force affecting this body (.*) N in direction \((.*), (.*), (.*)\)")]
+        public void GivenThereIsAForceAffectingThisBodyNInDirection(int p0, int p1, int p2, int p3)
+        {
+            PointA.AddForce(
+                new Force(p0, p1, p2, p3, ForceType.constant)
+                );
+        }
+
+
         [Then(@"the point should be at position (.*), (.*), (.*)")]
         public void ThenThePointShouldBeAtPosition(int p0, int p1, int p2)
         {

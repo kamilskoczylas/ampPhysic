@@ -27,7 +27,7 @@ namespace AmpPhysic.RigidBodies
             RearLeft = new PhysicWheel(R);
             RearRight = new PhysicWheel(R);
 
-            Parent.Add(
+            /*Parent.Add(
                 new PhysicConnector(
                     Parent,
                     FrontLeft, 
@@ -78,6 +78,7 @@ namespace AmpPhysic.RigidBodies
                         ),
                     new Vector3D(0, 1, 0))
                 );
+                */
 
         }
 
@@ -98,8 +99,9 @@ namespace AmpPhysic.RigidBodies
             double RealVelocity = -(2 * AngleVelocity * Math.PI * R * 2) * 10;
             Vector3D TiresAngleVelocity = new Vector3D(Math.Cos(CurrentWheelAngle) * RealVelocity, 0, Math.Sin(CurrentWheelAngle) * RealVelocity);
 
-            this.FrontLeft.AddForce(new Force(TiresAngleVelocity));
+            /*this.FrontLeft.AddForce(new Force(TiresAngleVelocity));
             this.FrontRight.AddForce(new Force(TiresAngleVelocity));
+            */
         }
 
         public void TryToSetVelocity(double CurrentWheelAngle, double Velocity)
@@ -110,8 +112,9 @@ namespace AmpPhysic.RigidBodies
 
             Vector3D TiresAngleVelocity = new Vector3D(Math.Cos(CurrentWheelAngle) * RealVelocity, 0, Math.Sin(CurrentWheelAngle) * RealVelocity);
 
-            this.FrontLeft.AddForce(new Force(TiresAngleVelocity));
+            /*this.FrontLeft.AddForce(new Force(TiresAngleVelocity));
             this.FrontRight.AddForce(new Force(TiresAngleVelocity));
+            */
         }
         
         public double Angle { get; private set; }

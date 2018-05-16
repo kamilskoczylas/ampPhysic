@@ -14,11 +14,11 @@ namespace AmpPhysic.RigidBodies
             this.R = new Vector3D(R, R, R);
         }
 
-        protected override void ChangeFrictionToForce(Friction FrictionForce)
+        /*protected override void ChangeFrictionToForce(Friction FrictionForce)
         {
             AddForce(
                 FrictionForce.GenerateForce()
                 );
-        }        
+        } */       
     }
 }

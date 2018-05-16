@@ -54,8 +54,10 @@
     <Compile Include="Interaction\Friction.cs" />
     <Compile Include="Interaction\IControlledObject.cs" />
     <Compile Include="IPhysic.cs" />
+    <Compile Include="IPhysicControl.cs" />
+    <Compile Include="IPhysicShape.cs" />
     <Compile Include="ModelBase.cs" />
-    <Compile Include="PhysicStructure.cs" />
+    <Compile Include="KinematicBody.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RigidBodies\PhysicBox.cs" />
     <Compile Include="RigidBodies\PhysicConnector.cs" />

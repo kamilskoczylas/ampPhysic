@@ -17,20 +17,20 @@ namespace AmpPhysicTests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("StaticPhysicPoint", Description="\tCheck I Newton law on a point", SourceFile="StaticPhysicPoint.feature", SourceLine=0)]
-    public partial class StaticPhysicPointFeature
+    [TechTalk.SpecRun.FeatureAttribute("PointKinematics", Description="\tTest behavior when point has collision with other objects", SourceFile="PointKinematics.feature", SourceLine=0)]
+    public partial class PointKinematicsFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "StaticPhysicPoint.feature"
+#line 1 "PointKinematics.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "StaticPhysicPoint", "\tCheck I Newton law on a point", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "PointKinematics", "\tTest behavior when point has collision with other objects", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -61,40 +61,26 @@ namespace AmpPhysicTests
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Point should not move when no force affects it", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("I should be notified when pointA has collision with another object", new string[] {
                 "mytag"}, SourceLine=4)]
-        public virtual void PointShouldNotMoveWhenNoForceAffectsIt()
+        public virtual void IShouldBeNotifiedWhenPointAHasCollisionWithAnotherObject()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Point should not move when no force affects it", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I should be notified when pointA has collision with another object", new string[] {
                         "mytag"});
 #line 5
 this.ScenarioSetup(scenarioInfo);
-#line 6
- testRunner.Given("A point in position 0, 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 7
- testRunner.And("Its velocity is 0, 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 8
- testRunner.When("1 second passes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 9
- testRunner.Then("the point should be at position 0, 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Point should move lineary when has velocity", SourceLine=11)]
-        public virtual void PointShouldMoveLinearyWhenHasVelocity()
+        [TechTalk.SpecRun.ScenarioAttribute("A point moves behind and very closely to another point with the same speed withou" +
+            "t collision", SourceLine=7)]
+        public virtual void APointMovesBehindAndVeryCloselyToAnotherPointWithTheSameSpeedWithoutCollision()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Point should move lineary when has velocity", ((string[])(null)));
-#line 12
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A point moves behind and very closely to another point with the same speed withou" +
+                    "t collision", ((string[])(null)));
+#line 8
 this.ScenarioSetup(scenarioInfo);
-#line 13
- testRunner.Given("A point in position 0, 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 14
- testRunner.And("Its velocity is 1, 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 15
- testRunner.When("1 second passes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 16
- testRunner.Then("the point should be at position 1, 0, 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
