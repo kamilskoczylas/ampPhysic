@@ -11,9 +11,13 @@ namespace AmpPhysicTests
     [Binding]
     public class PointStaticsSteps
     {
-        private VirtualWorld World = new VirtualWorld();
-        //private PhysicPoint bodyA;
+        private InjectablePhysicContext Context;        
         private GameObject PointA;
+
+        public PointStaticsSteps(InjectablePhysicContext injectablePhysicContext)
+        {
+            Context = injectablePhysicContext;
+        }
 
         [Given(@"A point in position (.*), (.*), (.*)")]
         public void GivenAPointInPosition(int p0, int p1, int p2)
@@ -21,7 +25,7 @@ namespace AmpPhysicTests
             PointA = new GameObject(new KinematicBody());
             PointA.SetPosition(p0, p1, p2);
 
-            World.AddObject(PointA);
+            Context.World.AddObject(PointA);
         }
         
         [Given(@"Its velocity is (.*), (.*), (.*)")]
@@ -32,8 +36,8 @@ namespace AmpPhysicTests
 
         [When(@"(.*) second passes")]
         public void WhenSecondPasses(int p0)
-        {           
-            World.Animate(p0);
+        {
+            Context.World.Animate(p0);
         }
 
         [Given(@"There is a force affecting this body (.*) N in direction \((.*), (.*), (.*)\)")]

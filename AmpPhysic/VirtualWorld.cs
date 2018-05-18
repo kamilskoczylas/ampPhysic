@@ -8,7 +8,7 @@ namespace AmpPhysic
 {
     public class VirtualWorld
     {
-        private List<GameObject> GameObjects;
+        private Dictionary<string, GameObject> GameObjects;
 
         private int PRECISION_3D_PER_ONE_UNIT_SIZE = 12; // min. to look nice 12
 
@@ -16,7 +16,7 @@ namespace AmpPhysic
 
         public VirtualWorld(int MeshPrecision = 12)
         {
-            GameObjects = new List<GameObject>();
+            GameObjects = new Dictionary<string, GameObject>();
 
             Responser = new CollisionResponser();
             PRECISION_3D_PER_ONE_UNIT_SIZE = MeshPrecision;
@@ -27,10 +27,41 @@ namespace AmpPhysic
             return this.Responser;
         }
         
-
-        public void AddObject(GameObject anObject)
+        public void RemoveObjects()
         {
-            GameObjects.Add(anObject);
+            GameObjects.Clear();
+        }
+
+        public bool TryGetObject(string ObjectName, out GameObject gameObject)
+        {            
+            return GameObjects.TryGetValue(ObjectName, out gameObject);
+        }
+
+        public void AddObject(GameObject anObject, string ObjectName = "body")
+        {
+            // auto naming
+            if (ObjectName == "body")
+            {                
+                for (char Letter = 'A'; Letter <= 'Z' ; Letter++)
+                {
+                    if (!GameObjects.ContainsKey(ObjectName + Letter))
+                    {
+                        ObjectName = ObjectName + Letter;
+                        break;
+                    }                        
+                }
+            }
+
+            if (GameObjects.ContainsKey(ObjectName))
+            {
+                throw new InvalidOperationException(
+                    String.Format(
+                        "Cannot add the object named: {0} as it already exists", ObjectName
+                        )
+                    );
+            }
+
+            GameObjects.Add(ObjectName, anObject);
         }
 
         private CollisionResponse TryToMove()
@@ -41,13 +72,13 @@ namespace AmpPhysic
         private IEnumerable<GameObject> GetPhysicGameObjects()
         {
             // TODO: Speed up with cache in the future
-            return GameObjects.Where(x => x.CalculatePhysicYesNo);
+            return GameObjects.Where(x => x.Value.CalculatePhysicYesNo).Select(x => x.Value);
         }
 
         private IEnumerable<GameObject> GetCollisableGameObjects()
         {
             // TODO: Speed up with cache in the future
-            return GameObjects.Where(x => x.CalculateCollisionsYesNo);
+            return GameObjects.Where(x => x.Value.CalculateCollisionsYesNo).Select(x => x.Value);
         }
 
         /**
@@ -99,15 +130,17 @@ namespace AmpPhysic
 
                 Animate(deltaTime);
 
-            }            
-
-            // Commit the movement
-            foreach (var ControlledObject in GetPhysicGameObjects())
-            {
-                ControlledObject.CommitDisplacement();
             }
+            else 
+            {                
+                // Commit the movement
+                foreach (var ControlledObject in GetPhysicGameObjects())
+                {
+                    ControlledObject.CommitDisplacement();
+                }
 
-            AnimateGravity();
+                AnimateGravity();
+            }
         }
     }
 }

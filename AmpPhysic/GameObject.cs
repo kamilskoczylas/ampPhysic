@@ -2,6 +2,7 @@
 using AmpPhysic.RigidBodies;
 using AmpPhysic.Collision;
 using AmpPhysic.Interaction;
+using System;
 
 namespace AmpPhysic
 {
@@ -27,6 +28,13 @@ namespace AmpPhysic
             this.RenderMeshYesNo = RenderMeshYesNo;
 
             Direction = new Vector3D { X = 0, Y = 0, Z = 1 };            
+        }
+
+        public event ObjectCollisionHandler CollisionEvent;
+
+        protected virtual void OnCollision(CollisionEventArgs e)
+        {
+            CollisionEvent?.Invoke(this, e);
         }
 
         public GameObject(IPhysicControl PhysicRidgidBody) : this()

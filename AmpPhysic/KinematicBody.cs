@@ -50,6 +50,12 @@ namespace AmpPhysic
             set;
         }
 
+        public Vector3D Acceleration
+        {
+            get;
+            set;
+        }
+
 
         public Vector3D PositionDisplacement
         {
@@ -107,10 +113,13 @@ namespace AmpPhysic
 
         public virtual void CalculateDisplacement(float deltaTime)
         {
-            CalculateVelocity(deltaTime);
-
             PositionDisplacement = Velocity * deltaTime;
             AngularDisplacement = AngularRadVelocity * deltaTime;
+
+            CalculateVelocity(deltaTime);
+
+            // s = V0t + at^2/2           
+            PositionDisplacement += Acceleration * (deltaTime * deltaTime) / 2;
         }
 
         public virtual void CommitDisplacement()
@@ -147,11 +156,11 @@ namespace AmpPhysic
 
         protected virtual void CalculateVelocity(float deltaTime)
         {
-            UpdateForce(deltaTime);            
+            UpdateForce(deltaTime);
 
-            Vector3D acceleration = NetForce / CenterOfMass.Mass;
+            Acceleration = NetForce / CenterOfMass.Mass;
 
-            CenterOfMass.Velocity += acceleration * deltaTime;
+            CenterOfMass.Velocity += Acceleration * deltaTime;
         }
 
         public void UpdateForce(float deltaTime)

@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collision\CollisionEvent.cs" />
     <Compile Include="Collision\CollisionResponse.cs" />
     <Compile Include="Collision\CollisionResponser.cs" />
     <Compile Include="Collision\Shapes\Point.cs" />
