@@ -16,21 +16,26 @@ namespace AmpPhysic.Collision
             staticTriangles = new List<StaticTriangle>();
 
         }
+        
 
-        public void AddBox(double width, double height, double deep)
+        public FastestCollision DoTheFastestCollision(List<GameObject> MovingGameObjects)
         {
+            FastestCollision fastestCollision = null;
+
+            foreach (var TestingGameObject in MovingGameObjects)
+            {
+
+            }
+
+            if (fastestCollision != null)
+            {
+                fastestCollision.GameObject.Hit(fastestCollision.CollisionResponse);
+            }
+
+            return fastestCollision;
         }
 
-        public void RegisterObject(ICollisable collisionObject)
-        {
-            possible_objects.Add(collisionObject);
-        }
-
-        public void RegisterStatic(ICollisable collisionObject)
-        {
-        }
-
-        public void RegisterStaticTriangle(Point3D t1, Point3D t2, Point3D t3)
+        /*public void RegisterStaticTriangle(Point3D t1, Point3D t2, Point3D t3)
         {
             staticTriangles.Add(
                 new StaticTriangle(t1, t2, t3)

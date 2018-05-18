@@ -204,11 +204,11 @@ namespace AmpPhysic.Graphic
                     Point3D p2 = new Point3D(); //Positions[start + indices[i * 3 + 2]];*/
 
                     //if (p0.Z < 1 || p1.Z < 1 || p2.Z < 1)
-                    Responser.RegisterStaticTriangle(
+                    /*Responser.RegisterStaticTriangle(
                                 p0,
                                 p1,
                                 p2
-                            );
+                            );*/
                 }
             }
 

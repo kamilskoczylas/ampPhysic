@@ -12,19 +12,19 @@ namespace AmpPhysic
 
         private int PRECISION_3D_PER_ONE_UNIT_SIZE = 12; // min. to look nice 12
 
-        private CollisionResponser Responser;
+        private CollisionResponser CollisionResponser;
 
         public VirtualWorld(int MeshPrecision = 12)
         {
             GameObjects = new Dictionary<string, GameObject>();
 
-            Responser = new CollisionResponser();
+            CollisionResponser = new CollisionResponser();
             PRECISION_3D_PER_ONE_UNIT_SIZE = MeshPrecision;
         }
 
         public CollisionResponser GetResponser()
         {
-            return this.Responser;
+            return this.CollisionResponser;
         }
         
         public void RemoveObjects()
@@ -109,10 +109,7 @@ namespace AmpPhysic
 
             // Generate the fastest collision
             float fastestCollisionTime = deltaTime;
-            foreach (var ControlledObject in GetCollisableGameObjects())
-            {
-                //ControlledObject.Animate(deltaTime);
-            }
+            var fastestCollision = CollisionResponser.DoTheFastestCollision(GetCollisableGameObjects().Where( x=> !x.CurrentlyStaticYesNo).ToList());
 
             // commit the first collision
             // ...
@@ -120,18 +117,18 @@ namespace AmpPhysic
 
             // When we have collision, animate only to the first one 
             // and recursively do the same
-            if (deltaTime != fastestCollisionTime)
+            if (fastestCollision != null)
             {
                 // Commit the movement
                 foreach (var ControlledObject in GetPhysicGameObjects())
                 {
-                    ControlledObject.CommitDisplacementPartially(fastestCollisionTime, deltaTime);
+                    ControlledObject.CommitDisplacementPartially(fastestCollision.CollisionDeltaTime, deltaTime);
                 }
 
-                Animate(deltaTime);
+                Animate(deltaTime - fastestCollision.CollisionDeltaTime);
 
             }
-            else 
+            else // no collision
             {                
                 // Commit the movement
                 foreach (var ControlledObject in GetPhysicGameObjects())

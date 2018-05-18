@@ -13,6 +13,7 @@ namespace AmpPhysic
         void CommitDisplacementPartially(float commitedTime, float totalDeltaTime);
         void ResetDisplacement();
 
+        ColliderShape GetColliderShape();
         void HandleCollision(CollisionResponse collisionResponse);
         
     }

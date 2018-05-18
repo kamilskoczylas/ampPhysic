@@ -3,6 +3,7 @@ using AmpPhysic.RigidBodies;
 using AmpPhysic.Collision;
 using AmpPhysic.Interaction;
 using System;
+using System.Collections.Generic;
 
 namespace AmpPhysic
 {
@@ -19,6 +20,7 @@ namespace AmpPhysic
         public bool CalculatePhysicYesNo;
         public bool CalculateCollisionsYesNo;
         public bool RenderMeshYesNo;
+        public bool CurrentlyStaticYesNo { get; private set; }        
 
 
         public GameObject(bool RenderMeshYesNo = true, bool CalculatePhysicYesNo = true, bool CalculateCollisionsYesNo = true)
@@ -26,7 +28,7 @@ namespace AmpPhysic
             this.CalculatePhysicYesNo = CalculatePhysicYesNo;
             this.CalculateCollisionsYesNo = CalculateCollisionsYesNo;
             this.RenderMeshYesNo = RenderMeshYesNo;
-
+            
             Direction = new Vector3D { X = 0, Y = 0, Z = 1 };            
         }
 
@@ -35,6 +37,13 @@ namespace AmpPhysic
         protected virtual void OnCollision(CollisionEventArgs e)
         {
             CollisionEvent?.Invoke(this, e);
+        }
+
+        public void Hit(CollisionResponse collisionResponse)
+        {
+            OnCollision(
+                new CollisionEventArgs(collisionResponse)
+                );
         }
 
         public GameObject(IPhysicControl PhysicRidgidBody) : this()
@@ -54,6 +63,7 @@ namespace AmpPhysic
 
         public void CalculateDisplacement(float deltaTime)
         {
+            CurrentlyStaticYesNo = true;
             kinematicBody.CalculateDisplacement(deltaTime);
         }
 

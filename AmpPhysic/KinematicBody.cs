@@ -4,6 +4,7 @@ using System.Windows.Media.Media3D;
 using AmpPhysic.RigidBodies;
 using AmpPhysic.Interaction;
 using AmpPhysic.Collision;
+using AmpPhysic.Collision.Shapes;
 
 namespace AmpPhysic
 {
@@ -17,9 +18,11 @@ namespace AmpPhysic
         private List<Force> StillActiveForces = null;
         
         private Vector3D NetForce;
-        
+        private List<IDisplacement> DisplacementList;
+        ColliderShape Shape;
 
-        public KinematicBody(double mass = 1)
+
+        public KinematicBody(double mass = 1, ColliderShape shape = null)
         {
             Elements = new List<IPhysicShape>();
             Forces = new List<Force>();
@@ -33,7 +36,21 @@ namespace AmpPhysic
             AngularDisplacement = new Vector3D(0, 0, 0);
             AngularRadVelocity = new Vector3D(0, 0, 0);
 
+            DisplacementList = new List<IDisplacement>();
+
+            if (shape == null)
+            {
+                shape = new PointColliderShape();
+            }
+
+            this.Shape = shape;
+
             CalculateCenterOfMass();
+        }
+
+        public ColliderShape GetColliderShape()
+        {
+            return Shape;
         }
 
         private PhysicPoint CenterOfMass;
@@ -113,10 +130,14 @@ namespace AmpPhysic
 
         public virtual void CalculateDisplacement(float deltaTime)
         {
-            PositionDisplacement = Velocity * deltaTime;
-            AngularDisplacement = AngularRadVelocity * deltaTime;
+            DisplacementList.Add(
+                    new LinearDisplacement(this, deltaTime)
+                );
 
-            CalculateVelocity(deltaTime);
+            /*PositionDisplacement = Velocity * deltaTime;
+            AngularDisplacement = AngularRadVelocity * deltaTime;*/
+
+            CalculateAcceleration(deltaTime);
 
             // s = V0t + at^2/2           
             PositionDisplacement += Acceleration * (deltaTime * deltaTime) / 2;
@@ -154,7 +175,7 @@ namespace AmpPhysic
             this.Children.Add(Connector);
         }
 
-        protected virtual void CalculateVelocity(float deltaTime)
+        protected virtual void CalculateAcceleration(float deltaTime)
         {
             UpdateForce(deltaTime);
 
