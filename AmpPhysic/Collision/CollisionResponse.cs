@@ -10,6 +10,7 @@ namespace AmpPhysic.Collision
         public Point3D CollisionPoint3D { get; private set; }
         public ICollisable ObjectColliding;
         public Friction FrictionForce;
+        public float CollisionDeltaTime;
 
         public CollisionResponse(CollistionDetails CollistionDetail)
         {

@@ -8,5 +8,13 @@ namespace AmpPhysic.Collision.Combinations
 {
     class PointPointCollision
     {
+        public CollisionResponse CheckSimplified(CollisionSimplifiedScenario scenario)
+        {
+            CollisionResponse test = null;
+
+            
+
+            return test;
+        }
     }
 }

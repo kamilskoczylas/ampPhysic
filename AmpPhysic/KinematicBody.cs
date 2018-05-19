@@ -48,6 +48,21 @@ namespace AmpPhysic
             CalculateCenterOfMass();
         }
 
+        public bool CurrentlyStaticYesNo
+        {
+            get { return !(Velocity.X != 0 || Velocity.Y != 0 || Velocity.Z != 0); }
+        }
+
+        public bool CurrentlyAcceleratingYesNo
+        {
+            get { return (Acceleration.X != 0 || Acceleration.Y != 0 || Acceleration.Z != 0); }
+        }
+
+        public List<IDisplacement> GetDisplacements()
+        {
+            return DisplacementList;
+        }
+
         public ColliderShape GetColliderShape()
         {
             return Shape;
@@ -132,42 +147,44 @@ namespace AmpPhysic
         {
             DisplacementList.Add(
                     new LinearDisplacement(this, deltaTime)
-                );
-
-            /*PositionDisplacement = Velocity * deltaTime;
-            AngularDisplacement = AngularRadVelocity * deltaTime;*/
+                );            
 
             CalculateAcceleration(deltaTime);
 
-            // s = V0t + at^2/2           
-            PositionDisplacement += Acceleration * (deltaTime * deltaTime) / 2;
+            if (CurrentlyAcceleratingYesNo)
+            {
+                DisplacementList.Add(
+                    new AcceleratedDisplacement(this, deltaTime)
+                );
+            }            
         }
 
+        
         public virtual void CommitDisplacement()
         {
-            this.CenterPosition = this.CenterPosition + PositionDisplacement;
-            this.AngularPosition = this.AngularPosition + AngularDisplacement;
+            foreach (var Displacement in DisplacementList)
+            {
+                this.CenterPosition = this.CenterPosition + Displacement.GetPositionChange();
+                //this.AngularPosition = this.AngularPosition + AngularDisplacement;
+            }            
 
             ResetDisplacement();
         }
 
-        public virtual void CommitDisplacementPartially(float commitedTime, float totalDeltaTime)
+        public virtual void CommitDisplacementPartially(float commitedTime)
         {
-            float proportion = commitedTime / totalDeltaTime;
-            float inverse_proportion = 1 - proportion;
+            foreach (var Displacement in DisplacementList)
+            {
+                this.CenterPosition = this.CenterPosition + Displacement.GetPositionChange(commitedTime);
+            }
 
-            this.CenterPosition = this.CenterPosition + PositionDisplacement * proportion;
-            this.AngularPosition = this.AngularPosition + AngularDisplacement * proportion;
-
-            PositionDisplacement = inverse_proportion * PositionDisplacement;
-            AngularDisplacement = inverse_proportion * AngularDisplacement;
+            // this happens only after collision
+            ResetDisplacement();
         }
 
         public virtual void ResetDisplacement()
         {
-            PositionDisplacement = new Vector3D(0, 0, 0);
-
-            AngularDisplacement = new Vector3D(0, 0, 0);
+            DisplacementList.Clear();            
         }
 
         public void Add(PhysicConnector Connector)

@@ -109,7 +109,9 @@ namespace AmpPhysic
 
             // Generate the fastest collision
             float fastestCollisionTime = deltaTime;
-            var fastestCollision = CollisionResponser.DoTheFastestCollision(GetCollisableGameObjects().Where( x=> !x.CurrentlyStaticYesNo).ToList());
+            var fastestCollision = CollisionResponser.DoTheFastestCollision(
+                    GetCollisableGameObjects().Where( x=> !x.CurrentlyStaticYesNo).ToList()
+                );
 
             // commit the first collision
             // ...
@@ -122,7 +124,9 @@ namespace AmpPhysic
                 // Commit the movement
                 foreach (var ControlledObject in GetPhysicGameObjects())
                 {
-                    ControlledObject.CommitDisplacementPartially(fastestCollision.CollisionDeltaTime, deltaTime);
+                    ControlledObject.CommitDisplacementPartially(fastestCollision.CollisionDeltaTime);
+                    
+                    // TODO: should recalculate displacements for both collisioned objects
                 }
 
                 Animate(deltaTime - fastestCollision.CollisionDeltaTime);

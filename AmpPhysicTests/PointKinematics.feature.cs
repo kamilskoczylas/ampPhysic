@@ -61,81 +61,83 @@ namespace AmpPhysicTests
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Bugatti Veyron acceleration", SourceLine=3)]
+        [TechTalk.SpecRun.ScenarioAttribute("Bugatti Veyron acceleration", SourceLine=4)]
+        [TechTalk.SpecRun.IgnoreAttribute()]
         public virtual void BugattiVeyronAcceleration()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bugatti Veyron acceleration", ((string[])(null)));
-#line 4
-this.ScenarioSetup(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Bugatti Veyron acceleration", new string[] {
+                        "ignore"});
 #line 5
- testRunner.Given("A car with engine power 1001 HP and mass of 1888 kg", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 6
- testRunner.And("Its engine efficency is typical as usually 40%", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("A car with engine power 1001 HP and mass of 1888 kg", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 7
- testRunner.And("Its starting position is (0, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Its engine efficency is typical as usually 40%", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 8
- testRunner.And("Its direction is (1, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Its starting position is (0, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 9
- testRunner.And("Its air resistance factor is 0.4 Surface of the front of car is 2 sqare meters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Its direction is (1, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
- testRunner.When("1 second passes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("Its air resistance factor is 0.4 Surface of the front of car is 2 sqare meters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 11
+ testRunner.When("1 second passes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 12
  testRunner.Then("Car velocity should be 100 km/h and position (70, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Renault Scenic acceleration", SourceLine=12)]
+        [TechTalk.SpecRun.ScenarioAttribute("Renault Scenic acceleration", SourceLine=14)]
+        [TechTalk.SpecRun.IgnoreAttribute()]
         public virtual void RenaultScenicAcceleration()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Renault Scenic acceleration", ((string[])(null)));
-#line 13
-this.ScenarioSetup(scenarioInfo);
-#line 14
- testRunner.Given("A car with engine power 113 HP and mass of 1340 kg", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Renault Scenic acceleration", new string[] {
+                        "ignore"});
 #line 15
- testRunner.And("Its engine efficency is typical as usually 40%", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
 #line 16
- testRunner.And("Its starting position is (0, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("A car with engine power 113 HP and mass of 1340 kg", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 17
- testRunner.And("Its direction is (1, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Its engine efficency is typical as usually 40%", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 18
- testRunner.And("Its air resistance factor is 0.4 Surface of the front of car is 2 sqare meters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("Its starting position is (0, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 19
- testRunner.When("15 second passes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("Its direction is (1, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 20
+ testRunner.And("Its air resistance factor is 0.4 Surface of the front of car is 2 sqare meters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 21
+ testRunner.When("15 second passes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 22
  testRunner.Then("Car velocity should be 100 km/h and position (230, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("I should be notified when pointA has collision with another object", new string[] {
-                "mytag"}, SourceLine=23)]
+        [TechTalk.SpecRun.ScenarioAttribute("I should be notified when pointA has collision with another object", SourceLine=24)]
         public virtual void IShouldBeNotifiedWhenPointAHasCollisionWithAnotherObject()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I should be notified when pointA has collision with another object", new string[] {
-                        "mytag"});
-#line 24
-this.ScenarioSetup(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I should be notified when pointA has collision with another object", ((string[])(null)));
 #line 25
- testRunner.Given("A bodyA in position (0, 0, 0) and bodyB in position (10, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 26
- testRunner.And("The bodyA velocity is (2, 0, 0) and bodyB velocity is (1, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("A bodyA in position (0, 0, 0) and bodyB in position (10, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 27
- testRunner.And("After 7 seconds nothing happens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("The bodyA velocity is (2, 0, 0) and bodyB velocity is (1, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 28
+ testRunner.And("After 7 seconds nothing happens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 29
  testRunner.Then("After 2 seconds I should recive collision event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("A point moves behind and very closely to another point with the same speed withou" +
-            "t collision", SourceLine=30)]
+            "t collision", SourceLine=31)]
         public virtual void APointMovesBehindAndVeryCloselyToAnotherPointWithTheSameSpeedWithoutCollision()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A point moves behind and very closely to another point with the same speed withou" +
                     "t collision", ((string[])(null)));
-#line 31
+#line 32
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();

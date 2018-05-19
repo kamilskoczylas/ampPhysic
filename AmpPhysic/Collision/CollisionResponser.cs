@@ -7,13 +7,17 @@ namespace AmpPhysic.Collision
     public class CollisionResponser
     {
         private List<ICollisable> possible_objects;
-
         private List<StaticTriangle> staticTriangles;
+        private TestCollisionStrategy CollisionStrategy;
+        private DisplacementSimplifier DisplacementSimplifier;
 
         public CollisionResponser()
         {
             possible_objects = new List<ICollisable>();
             staticTriangles = new List<StaticTriangle>();
+
+            CollisionStrategy = new TestCollisionStrategy();
+            DisplacementSimplifier = new DisplacementSimplifier();
 
         }
         
@@ -21,10 +25,41 @@ namespace AmpPhysic.Collision
         public FastestCollision DoTheFastestCollision(List<GameObject> MovingGameObjects)
         {
             FastestCollision fastestCollision = null;
+            CollisionResponse collisionResponse;
 
             foreach (var TestingGameObject in MovingGameObjects)
             {
 
+                var PrimaryDisplacements = TestingGameObject.GetDisplacements();
+
+                foreach (var SecondCrossTest in MovingGameObjects)
+                {
+                    if (TestingGameObject != SecondCrossTest)
+                    {
+                        var SecondaryDisplacements = TestingGameObject.GetDisplacements();
+
+                        CollisionSimplifiedScenario Scenario;
+
+                        Scenario = DisplacementSimplifier.Simplify
+                            (PrimaryDisplacements, SecondaryDisplacements);
+
+                        if (Scenario == null)
+                            continue;
+
+                        collisionResponse = CollisionStrategy.Test(Scenario);
+
+                        if (collisionResponse != null)
+                        {
+                            if (fastestCollision == null || fastestCollision.CollisionDeltaTime > collisionResponse.CollisionDeltaTime)
+                            {
+                                fastestCollision = new FastestCollision(
+                                        collisionResponse, SecondCrossTest
+                                    );
+
+                            }
+                        }
+                    }
+                }
             }
 
             if (fastestCollision != null)

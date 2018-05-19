@@ -52,6 +52,9 @@
     <Compile Include="Collision\Shapes\Point.cs" />
     <Compile Include="Collision\Shapes\PointColliderShape.cs" />
     <Compile Include="Collision\Shapes\TriangleCollision.cs" />
+    <Compile Include="Collision\TestCollisionStrategy.cs" />
+    <Compile Include="Consts.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Collision\ICollisable.cs" />
     <Compile Include="Graphic\BasicBuilder.cs" />

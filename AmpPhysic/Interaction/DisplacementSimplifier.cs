@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
+using AmpPhysic;
 using AmpPhysic.Collision;
 
 namespace AmpPhysic.Interaction
@@ -19,6 +20,33 @@ namespace AmpPhysic.Interaction
      */
     public class DisplacementSimplifier
     {
+        private Vector3D Zero = new Vector3D(0, 0, 0);
+        private Point3D Center = new Point3D(0, 0, 0);
+
+        public DisplacementSimplifier()
+        {
+        }
+
+        public CollisionSimplifiedScenario Simplify(
+            List<IDisplacement> objectA_List,
+            List<IDisplacement> objectB_List
+            )
+        {
+            if (objectA_List.Count == 1 && objectB_List.Count == 1)
+            {
+                if (objectA_List[0].GetType().Name == objectB_List[0].GetType().Name)
+                {
+                    if (objectA_List[0].GetType() == typeof(LinearDisplacement))
+                    {
+                        return Simplify(objectA_List[0] as LinearDisplacement, 
+                            objectB_List[0] as LinearDisplacement);
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public CollisionSimplifiedScenario Simplify(
             LinearDisplacement objectA, 
             LinearDisplacement objectB
@@ -34,13 +62,24 @@ namespace AmpPhysic.Interaction
                     objectA.DeltaTime
                 );
 
-            CollisionSimplifiedScenario simplifiedScenario = 
+            if (
+                EffectiveLinearDisplacement.Velocity == Zero
+                && SecondObjectCenter != Center
+                )
+            {
+                return null;
+
+            } else
+            {
+                CollisionSimplifiedScenario simplifiedScenario =
                 new CollisionSimplifiedScenario(
                         objectA.PhysicObject.GetColliderShape(),
                         objectB.PhysicObject.GetColliderShape(),
                         EffectiveLinearDisplacement
                     );
-            return simplifiedScenario;
+
+                return simplifiedScenario;
+            }
         }
     }
 }

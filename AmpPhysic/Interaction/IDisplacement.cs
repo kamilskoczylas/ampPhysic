@@ -7,12 +7,14 @@ using System.Windows.Media.Media3D;
 
 namespace AmpPhysic.Interaction
 {
-    interface IDisplacement
+    public interface IDisplacement
     {
         Vector3D Velocity { get; }
         float DeltaTime { get; }
         Point3D StartingPosition { get; }
 
         IPhysicControl PhysicObject { get; }
+
+        Vector3D GetPositionChange(float displacementTime = 0);
     }
 }

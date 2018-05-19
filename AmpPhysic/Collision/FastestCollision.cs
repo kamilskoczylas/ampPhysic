@@ -17,7 +17,7 @@ namespace AmpPhysic.Collision
         public CollisionResponse CollisionResponse { get; private set; }
         public GameObject GameObject { get; private set; }
 
-        public float CollisionDeltaTime;
+        public float CollisionDeltaTime { get { return CollisionResponse.CollisionDeltaTime; } }
         
     }
 }

@@ -32,5 +32,15 @@ namespace AmpPhysic.Interaction
         public Point3D StartingPosition { get; private set; }
 
         public IPhysicControl PhysicObject { get; private set; }
+
+        public Vector3D GetPositionChange(float displacementTime = 0)
+        {
+            if (displacementTime == 0)
+            {
+                return Velocity * DeltaTime;
+            }
+
+            return Velocity * displacementTime;
+        }
     }
 }

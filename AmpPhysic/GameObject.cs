@@ -20,7 +20,7 @@ namespace AmpPhysic
         public bool CalculatePhysicYesNo;
         public bool CalculateCollisionsYesNo;
         public bool RenderMeshYesNo;
-        public bool CurrentlyStaticYesNo { get; private set; }        
+        public bool CurrentlyStaticYesNo { get { return kinematicBody.CurrentlyStaticYesNo; } }        
 
 
         public GameObject(bool RenderMeshYesNo = true, bool CalculatePhysicYesNo = true, bool CalculateCollisionsYesNo = true)
@@ -62,9 +62,13 @@ namespace AmpPhysic
         }        
 
         public void CalculateDisplacement(float deltaTime)
-        {
-            CurrentlyStaticYesNo = true;
+        {            
             kinematicBody.CalculateDisplacement(deltaTime);
+        }
+
+        public List<IDisplacement> GetDisplacements()
+        {
+            return kinematicBody.GetDisplacements();
         }
 
         public void CommitDisplacement()
@@ -72,9 +76,9 @@ namespace AmpPhysic
             kinematicBody.CommitDisplacement();
         }
 
-        public void CommitDisplacementPartially(float commitedTime, float totalDeltaTime)
+        public void CommitDisplacementPartially(float commitedTime)
         {
-            kinematicBody.CommitDisplacementPartially(commitedTime, totalDeltaTime);
+            kinematicBody.CommitDisplacementPartially(commitedTime);
         }
 
         public void AddForce(Force force)
