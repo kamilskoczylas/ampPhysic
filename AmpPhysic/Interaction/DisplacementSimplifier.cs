@@ -38,8 +38,11 @@ namespace AmpPhysic.Interaction
                 {
                     if (objectA_List[0].GetType() == typeof(LinearDisplacement))
                     {
-                        return Simplify(objectA_List[0] as LinearDisplacement, 
-                            objectB_List[0] as LinearDisplacement);
+                        return 
+                            Simplify(
+                                objectA_List[0] as LinearDisplacement, 
+                                objectB_List[0] as LinearDisplacement
+                                );
                     }
                 }
             }
@@ -57,7 +60,7 @@ namespace AmpPhysic.Interaction
             LinearDisplacement EffectiveLinearDisplacement =
                 new LinearDisplacement
                 (
-                    objectA.Velocity - objectB.Velocity,
+                    objectB.Velocity - objectA.Velocity,
                     SecondObjectCenter,
                     objectA.DeltaTime
                 );

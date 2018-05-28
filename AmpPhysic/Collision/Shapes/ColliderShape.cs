@@ -8,5 +8,7 @@ namespace AmpPhysic.Collision
 {
     public class ColliderShape
     {
+        public virtual float CalculateMaximumRadius { get; }
+
     }
 }

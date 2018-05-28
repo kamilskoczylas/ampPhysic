@@ -25,7 +25,7 @@ Scenario: Renault Scenic acceleration
 Scenario: I should be notified when pointA has collision with another object
 	Given A bodyA in position (0, 0, 0) and bodyB in position (10, 0, 0)
 	And The bodyA velocity is (2, 0, 0) and bodyB velocity is (1, 0, 0)
-	And After 7 seconds nothing happens	
+	And After 9 seconds nothing happens	
 	Then After 2 seconds I should recive collision event
 
 

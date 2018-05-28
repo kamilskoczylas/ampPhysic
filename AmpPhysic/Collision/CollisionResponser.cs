@@ -10,6 +10,7 @@ namespace AmpPhysic.Collision
         private List<StaticTriangle> staticTriangles;
         private TestCollisionStrategy CollisionStrategy;
         private DisplacementSimplifier DisplacementSimplifier;
+        private CollisionEfficencyBooster Booster;
 
         public CollisionResponser()
         {
@@ -18,49 +19,52 @@ namespace AmpPhysic.Collision
 
             CollisionStrategy = new TestCollisionStrategy();
             DisplacementSimplifier = new DisplacementSimplifier();
-
+            Booster = new CollisionEfficencyBooster();
         }
         
 
         public FastestCollision DoTheFastestCollision(List<GameObject> MovingGameObjects)
         {
+            
+            // Precalculate intersecting areas
+            var PossibleCollisionGroups = Booster.CheckAll(MovingGameObjects);
+
+            // 2. For each intersecting area calculate precise collision details, if any
+
             FastestCollision fastestCollision = null;
             CollisionResponse collisionResponse;
 
-            foreach (var TestingGameObject in MovingGameObjects)
+            foreach (var TestingGroup in PossibleCollisionGroups)
             {
-
-                var PrimaryDisplacements = TestingGameObject.GetDisplacements();
-
-                foreach (var SecondCrossTest in MovingGameObjects)
+                foreach (var testing in TestingGroup.GetPossibleCollidingObjects())
                 {
-                    if (TestingGameObject != SecondCrossTest)
+                    IPhysicControl SecondCrossTest = testing.GetSecondary();
+                    var PrimaryDisplacements = testing.GetPrimary().GetDisplacements();
+                    var SecondaryDisplacements = SecondCrossTest.GetDisplacements();
+
+                    CollisionSimplifiedScenario Scenario;
+
+                    Scenario = DisplacementSimplifier.Simplify
+                        (PrimaryDisplacements, SecondaryDisplacements);
+
+                    if (Scenario == null)
+                        continue;
+
+                    collisionResponse = CollisionStrategy.Test(Scenario);
+
+                    if (collisionResponse != null)
                     {
-                        var SecondaryDisplacements = TestingGameObject.GetDisplacements();
-
-                        CollisionSimplifiedScenario Scenario;
-
-                        Scenario = DisplacementSimplifier.Simplify
-                            (PrimaryDisplacements, SecondaryDisplacements);
-
-                        if (Scenario == null)
-                            continue;
-
-                        collisionResponse = CollisionStrategy.Test(Scenario);
-
-                        if (collisionResponse != null)
+                        if (fastestCollision == null || fastestCollision.CollisionDeltaTime > collisionResponse.CollisionDeltaTime)
                         {
-                            if (fastestCollision == null || fastestCollision.CollisionDeltaTime > collisionResponse.CollisionDeltaTime)
-                            {
-                                fastestCollision = new FastestCollision(
-                                        collisionResponse, SecondCrossTest
-                                    );
+                            fastestCollision = new FastestCollision(
+                                    collisionResponse, SecondCrossTest.GameObject
+                                );
 
-                            }
                         }
                     }
                 }
             }
+            
 
             if (fastestCollision != null)
             {

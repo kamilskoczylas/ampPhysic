@@ -12,13 +12,13 @@ namespace AmpPhysic
 
         private int PRECISION_3D_PER_ONE_UNIT_SIZE = 12; // min. to look nice 12
 
-        private CollisionResponser CollisionResponser;
+        private CollisionResponser CollisionResponser;        
 
         public VirtualWorld(int MeshPrecision = 12)
         {
             GameObjects = new Dictionary<string, GameObject>();
 
-            CollisionResponser = new CollisionResponser();
+            CollisionResponser = new CollisionResponser();            
             PRECISION_3D_PER_ONE_UNIT_SIZE = MeshPrecision;
         }
 
@@ -105,12 +105,12 @@ namespace AmpPhysic
             foreach (var ControlledObject in GetPhysicGameObjects())
             {                
                 ControlledObject.CalculateDisplacement(deltaTime);
-            }
+            }            
 
             // Generate the fastest collision
             float fastestCollisionTime = deltaTime;
             var fastestCollision = CollisionResponser.DoTheFastestCollision(
-                    GetCollisableGameObjects().Where( x=> !x.CurrentlyStaticYesNo).ToList()
+                    GetCollisableGameObjects().Where(x => !x.CurrentlyStaticYesNo).ToList()
                 );
 
             // commit the first collision

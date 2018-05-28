@@ -42,12 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collision\CollidingObjects.cs" />
+    <Compile Include="Collision\CollisableSection.cs" />
+    <Compile Include="Collision\CollisionEfficencyBooster.cs" />
     <Compile Include="Collision\CollisionEvent.cs" />
     <Compile Include="Collision\CollisionResponse.cs" />
     <Compile Include="Collision\CollisionResponser.cs" />
     <Compile Include="Collision\CollisionSimplifiedScenario.cs" />
     <Compile Include="Collision\Combinations\PointPointCollision.cs" />
     <Compile Include="Collision\FastestCollision.cs" />
+    <Compile Include="Collision\PossibleCollisionsGroup.cs" />
     <Compile Include="Collision\Shapes\ColliderShape.cs" />
     <Compile Include="Collision\Shapes\Point.cs" />
     <Compile Include="Collision\Shapes\PointColliderShape.cs" />

@@ -20,7 +20,8 @@ namespace AmpPhysic
         public bool CalculatePhysicYesNo;
         public bool CalculateCollisionsYesNo;
         public bool RenderMeshYesNo;
-        public bool CurrentlyStaticYesNo { get { return kinematicBody.CurrentlyStaticYesNo; } }        
+        public bool CurrentlyStaticYesNo { get { return kinematicBody.CurrentlyStaticYesNo; } }
+        private List<IPhysicControl> kinematicList;
 
 
         public GameObject(bool RenderMeshYesNo = true, bool CalculatePhysicYesNo = true, bool CalculateCollisionsYesNo = true)
@@ -28,7 +29,9 @@ namespace AmpPhysic
             this.CalculatePhysicYesNo = CalculatePhysicYesNo;
             this.CalculateCollisionsYesNo = CalculateCollisionsYesNo;
             this.RenderMeshYesNo = RenderMeshYesNo;
-            
+
+            kinematicList = new List<IPhysicControl>();
+
             Direction = new Vector3D { X = 0, Y = 0, Z = 1 };            
         }
 
@@ -49,6 +52,20 @@ namespace AmpPhysic
         public GameObject(IPhysicControl PhysicRidgidBody) : this()
         {
             kinematicBody = PhysicRidgidBody;
+            OnKinematicChange();
+        }
+
+        private void OnKinematicChange()
+        {
+            kinematicList.Clear();
+            kinematicList.Add(kinematicBody);
+
+            kinematicList.ForEach(x => x.GameObject = this);
+        }
+
+        public List<IPhysicControl> GetKinematics()
+        {
+            return kinematicList;
         }
 
         public void SetInitialVelocity(double x, double y, double z)

@@ -15,13 +15,15 @@ namespace AmpPhysic
         void CommitDisplacementPartially(float commitedTime);
         void ResetDisplacement();
 
+        CollisableArea GetCollisionArea();
         ColliderShape GetColliderShape();
-        void HandleCollision(CollisionResponse collisionResponse);
         List<IDisplacement> GetDisplacements();
-
         Vector3D Acceleration { get; }
-        bool CurrentlyStaticYesNo { get; }
 
+        void HandleCollision(CollisionResponse collisionResponse);
+        bool CurrentlyStaticYesNo { get; }
+            
+        GameObject GameObject { get; set; }
 
     }
 }

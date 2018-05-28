@@ -124,7 +124,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 27
  testRunner.And("The bodyA velocity is (2, 0, 0) and bodyB velocity is (1, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 28
- testRunner.And("After 7 seconds nothing happens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("After 9 seconds nothing happens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 29
  testRunner.Then("After 2 seconds I should recive collision event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

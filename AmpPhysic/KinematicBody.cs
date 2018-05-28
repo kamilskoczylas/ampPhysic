@@ -16,10 +16,12 @@ namespace AmpPhysic
         private List<PhysicConnector> Children;
         private List<Force> Forces;
         private List<Force> StillActiveForces = null;
-        
+
         private Vector3D NetForce;
         private List<IDisplacement> DisplacementList;
         ColliderShape Shape;
+
+        public float MaximumRadius { get; private set; }
 
 
         public KinematicBody(double mass = 1, ColliderShape shape = null)
@@ -44,8 +46,42 @@ namespace AmpPhysic
             }
 
             this.Shape = shape;
-
+            OnShapeChange();
             CalculateCenterOfMass();
+        }
+
+        private void OnShapeChange()
+        {
+            // Anylaze shape to calculate something like bounding box
+            // this will be maximumRadius of the shape rotated in any direction,
+            // so instead of bounding box will be bounding sphere
+            MaximumRadius = Shape.CalculateMaximumRadius;
+        }
+
+        public CollisableArea GetCollisionArea()
+        {
+            var tmp = SummarizeDisplacements();
+            double dX, dZ;
+
+            if (tmp.X >= 0)
+            {
+                dX = MaximumRadius + tmp.X;
+            }
+            else
+            {
+                dX = tmp.X - MaximumRadius;
+            }
+
+            if (tmp.Z >= 0)
+            {
+                dZ = MaximumRadius + tmp.Z;
+            }
+            else
+            {
+                dZ = tmp.Z - MaximumRadius;
+            }            
+
+            return new CollisableArea(CenterPosition.X, CenterPosition.Z, dX, dZ, this);
         }
 
         public bool CurrentlyStaticYesNo
@@ -128,7 +164,9 @@ namespace AmpPhysic
             {
                 CenterOfMass.Mass = value;
             }
-        }
+        }        
+
+        public GameObject GameObject { get; set; }
 
         protected void CalculateCenterOfMass()
         {
@@ -159,14 +197,22 @@ namespace AmpPhysic
             }            
         }
 
-        
-        public virtual void CommitDisplacement()
+        private Vector3D SummarizeDisplacements()
         {
+            Vector3D TotalDisplacement = new Vector3D(0, 0, 0);
             foreach (var Displacement in DisplacementList)
             {
-                this.CenterPosition = this.CenterPosition + Displacement.GetPositionChange();
+                TotalDisplacement += Displacement.GetPositionChange();
                 //this.AngularPosition = this.AngularPosition + AngularDisplacement;
-            }            
+            }
+
+            return TotalDisplacement;
+        }
+
+        
+        public virtual void CommitDisplacement()
+        {            
+            this.CenterPosition = this.CenterPosition + SummarizeDisplacements();
 
             ResetDisplacement();
         }

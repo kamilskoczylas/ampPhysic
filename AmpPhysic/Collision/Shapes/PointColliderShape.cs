@@ -8,5 +8,12 @@ namespace AmpPhysic.Collision.Shapes
 {
     class PointColliderShape : ColliderShape
     {
+        public override float CalculateMaximumRadius {
+            get
+            {                
+                return 0.0f;
+            }
+
+         }
     }
 }
