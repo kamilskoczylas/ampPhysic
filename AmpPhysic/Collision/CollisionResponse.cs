@@ -23,5 +23,11 @@ namespace AmpPhysic.Collision
                     CollisionForceVector
                 );
         }
+
+        public CollisionResponse(float deltaTime, Point3D IntersectionPoint)
+        {
+            this.CollisionDeltaTime = deltaTime;
+            CollisionPoint3D = IntersectionPoint;
+        }
     }
 }

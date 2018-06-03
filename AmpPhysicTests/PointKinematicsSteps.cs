@@ -117,7 +117,7 @@ namespace AmpPhysicTests
         [Given(@"After (.*) seconds nothing happens")]
         public void GivenAfterSecondsNothingHappens(int p0)
         {
-            if (Context.World.TryGetObject("bodyA", out GameObject aBody))
+            if (Context.World.TryGetObject("bodyB", out GameObject aBody))
             {
                 aBody.CollisionEvent += ShouldNotReceiveTheCollision;
             }
@@ -134,7 +134,8 @@ namespace AmpPhysicTests
         [Then(@"After (.*) seconds I should recive collision event")]
         public void ThenAfterSecondsIShouldReciveCollisionEvent(int p0)
         {
-            bool testSucceded = false;
+            bool testSucceded = false;            
+
             try
             {
                 // Collision should occur somewhere here

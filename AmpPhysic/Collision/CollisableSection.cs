@@ -80,8 +80,8 @@ namespace AmpPhysic.Collision
         public bool IsCollidingWith(CollisableArea anotherSection)
         {
             return
-                (X <= anotherSection.X2) && (anotherSection.X >= X2) &&
-                (Z <= anotherSection.Z2) && (anotherSection.Z >= Z2);
+                (X <= anotherSection.X2) && (anotherSection.X <= X2) &&
+                (Z <= anotherSection.Z2) && (anotherSection.Z <= Z2);
 
         }
     }

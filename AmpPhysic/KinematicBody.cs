@@ -65,23 +65,23 @@ namespace AmpPhysic
 
             if (tmp.X >= 0)
             {
-                dX = MaximumRadius + tmp.X;
+                dX = MaximumRadius * 2 + tmp.X;
             }
             else
             {
-                dX = tmp.X - MaximumRadius;
+                dX = tmp.X - MaximumRadius * 2;
             }
 
             if (tmp.Z >= 0)
             {
-                dZ = MaximumRadius + tmp.Z;
+                dZ = MaximumRadius * 2 + tmp.Z;
             }
             else
             {
-                dZ = tmp.Z - MaximumRadius;
+                dZ = tmp.Z - MaximumRadius * 2;
             }            
 
-            return new CollisableArea(CenterPosition.X, CenterPosition.Z, dX, dZ, this);
+            return new CollisableArea(CenterPosition.X - MaximumRadius, CenterPosition.Z - MaximumRadius, dX, dZ, this);
         }
 
         public bool CurrentlyStaticYesNo
