@@ -12,10 +12,12 @@ namespace AmpPhysic.Collision
     {
 
         PointPointCollision Point_Point;
+        SpherePointCollision Sphere_Point;
 
         public TestCollisionStrategy()
         {
             Point_Point = new PointPointCollision();
+            Sphere_Point = new SpherePointCollision();
         }
 
         public CollisionResponse Test(CollisionSimplifiedScenario Scenario)
@@ -27,7 +29,10 @@ namespace AmpPhysic.Collision
                     switch (Scenario.ColliderShape2.GetType().Name)
                     {
                         case "PointColliderShape":
-                            return Point_Point.CheckSimplified(Scenario);                            
+                            return Point_Point.CheckSimplified(Scenario);
+
+                        case "SphereColliderShape":
+                            return Sphere_Point.CheckSimplified(Scenario);
                     }
                 break;
             }

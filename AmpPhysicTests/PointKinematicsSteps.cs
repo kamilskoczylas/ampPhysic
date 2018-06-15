@@ -122,9 +122,21 @@ namespace AmpPhysicTests
                 aBody.CollisionEvent += ShouldNotReceiveTheCollision;
             }
 
-            Context.World.Animate(p0);
-            
+            Context.World.Animate(p0);            
         }
+
+        [Given(@"A sphere in position \((.*), (.*), (.*)\) and radius (.*) and point in position \((.*), (.*), (.*)\)")]
+        public void GivenASphereInPositionAndRadiusAndPointInPosition(int p0, int p1, int p2, int p3, int p4, int p5, int p6)
+        {
+            Context.World.RemoveObjects();
+
+            var bodyA = Context.CreateGameObject();
+            var bodyB = Context.CreateGameObject();
+
+            bodyA.SetPosition(p0, p1, p2);
+            bodyB.SetPosition(p4, p5, p6);
+        }
+                
 
         private void ShouldNotReceiveTheCollision(object sender, CollisionEventArgs e)
         {            
@@ -148,6 +160,26 @@ namespace AmpPhysicTests
 
             Assert.IsTrue(testSucceded);
         }
+
+        [Then(@"After (.*) seconds co collision should happen")]
+        public void ThenAfterSecondsCoCollisionShouldHappen(int p0)
+        {
+            bool testSucceded = true;
+
+            try
+            {
+                // Collision should occur somewhere here
+                Context.World.Animate(p0);
+
+            }
+            catch (InternalTestFailureException)
+            {
+                testSucceded = false;
+            }
+
+            Assert.IsTrue(testSucceded);
+        }
+
 
 
     }

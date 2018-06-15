@@ -139,6 +139,30 @@ this.ScenarioSetup(scenarioInfo);
                     "t collision", ((string[])(null)));
 #line 32
 this.ScenarioSetup(scenarioInfo);
+#line 33
+ testRunner.Given("A bodyA in position (0, 3, 3) and bodyB in position (1, 4, 4)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 34
+ testRunner.And("The bodyA velocity is (999, 888, 777) and bodyB velocity is (999, 888, 777)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 35
+ testRunner.Then("After 50 seconds co collision should happen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("I should be notified when sphereA has collision with a point", SourceLine=37)]
+        public virtual void IShouldBeNotifiedWhenSphereAHasCollisionWithAPoint()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I should be notified when sphereA has collision with a point", ((string[])(null)));
+#line 38
+this.ScenarioSetup(scenarioInfo);
+#line 39
+ testRunner.Given("A sphere in position (0, 0, 0) and radius 2 and point in position (10, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 40
+ testRunner.And("The bodyA velocity is (2, 0, 0) and bodyB velocity is (1, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+ testRunner.And("After 9 seconds nothing happens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
+ testRunner.Then("After 2 seconds I should recive collision event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

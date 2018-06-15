@@ -30,3 +30,13 @@ Scenario: I should be notified when pointA has collision with another object
 
 
 Scenario: A point moves behind and very closely to another point with the same speed without collision
+	Given A bodyA in position (0, 3, 3) and bodyB in position (1, 4, 4)
+	And The bodyA velocity is (999, 888, 777) and bodyB velocity is (999, 888, 777)
+	Then After 50 seconds co collision should happen
+
+
+Scenario: I should be notified when sphereA has collision with a point
+	Given A sphere in position (0, 0, 0) and radius 2 and point in position (10, 0, 0)
+	And The bodyA velocity is (2, 0, 0) and bodyB velocity is (1, 0, 0)
+	And After 9 seconds nothing happens
+	Then After 2 seconds I should recive collision event

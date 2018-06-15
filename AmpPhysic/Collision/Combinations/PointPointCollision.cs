@@ -14,7 +14,7 @@ namespace AmpPhysic.Collision.Combinations
             CollisionResponse test = null;
 
             /**
-             * k: x/a = y/b = z/c              * 
+             * k: x/a = y/b = z/c 
              * for a, b, c != 0
              */
 

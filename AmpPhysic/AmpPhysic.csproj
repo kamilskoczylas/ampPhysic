@@ -50,11 +50,13 @@
     <Compile Include="Collision\CollisionResponser.cs" />
     <Compile Include="Collision\CollisionSimplifiedScenario.cs" />
     <Compile Include="Collision\Combinations\PointPointCollision.cs" />
+    <Compile Include="Collision\Combinations\SpherePointCollision.cs" />
     <Compile Include="Collision\FastestCollision.cs" />
     <Compile Include="Collision\PossibleCollisionsGroup.cs" />
     <Compile Include="Collision\Shapes\ColliderShape.cs" />
     <Compile Include="Collision\Shapes\Point.cs" />
     <Compile Include="Collision\Shapes\PointColliderShape.cs" />
+    <Compile Include="Collision\Shapes\SphereColliderShape.cs" />
     <Compile Include="Collision\Shapes\TriangleCollision.cs" />
     <Compile Include="Collision\TestCollisionStrategy.cs" />
     <Compile Include="Consts.cs" />
