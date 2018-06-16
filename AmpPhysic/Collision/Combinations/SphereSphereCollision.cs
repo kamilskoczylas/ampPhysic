@@ -8,7 +8,7 @@ using AmpPhysic.Extensions;
 
 namespace AmpPhysic.Collision.Combinations
 {
-    class SpherePointCollision
+    class SphereSphereCollision
     {
         /**
          * <summary>
@@ -25,18 +25,16 @@ namespace AmpPhysic.Collision.Combinations
             //      it may happen if (|point center| - R) ^2 <= movement ^2
 
             double R = scenario.ColliderShape1.CalculateMaximumRadius;
-             
+
             Vector3D totalDisplacement;
             totalDisplacement = scenario.Linear.Velocity * scenario.Linear.DeltaTime;            
 
-            Vector3D minimumDistanceToSphere = new Point3D(0, 0, 0) - scenario.Linear.StartingPosition;
+            Vector3D minimumDistanceToSphere = scenario.Linear.StartingPosition - new Point3D(0, 0, 0);
             Vector3D absoluteminimumDistanceToSphere = minimumDistanceToSphere.Abs();
 
-            absoluteminimumDistanceToSphere.X = Math.Max(0, absoluteminimumDistanceToSphere.X - R);
-            absoluteminimumDistanceToSphere.Y = Math.Max(0, absoluteminimumDistanceToSphere.Y - R);
-            absoluteminimumDistanceToSphere.Z = Math.Max(0, absoluteminimumDistanceToSphere.Z - R);
+            absoluteminimumDistanceToSphere = absoluteminimumDistanceToSphere - new Vector3D(R, R, R);
 
-            if (absoluteminimumDistanceToSphere.LengthSquared > totalDisplacement.LengthSquared)
+            if (minimumDistanceToSphere.LengthSquared > totalDisplacement.LengthSquared)
             {
                 return test;
             }
@@ -56,8 +54,7 @@ namespace AmpPhysic.Collision.Combinations
             VelocityDirectionNormalized.Normalize();
 
             double lo = Vector3D.DotProduct(VelocityDirectionNormalized, PointTowardsSphereCenter);
-            Vector3D TowardCenterAbsolute = PointTowardsSphereCenter.Abs();
-            double sqareRootValue = lo * lo - TowardCenterAbsolute.LengthSquared + R * R;
+            double sqareRootValue = lo * lo - PointTowardsSphereCenter.Abs().LengthSquared + R * R;
 
             // 3a. escape condition
             if (sqareRootValue < 0)
@@ -66,21 +63,13 @@ namespace AmpPhysic.Collision.Combinations
             }
 
             double squareCalculatedValue = Math.Sqrt(sqareRootValue);
-            double d1 = Math.Abs(-lo + squareCalculatedValue);
-            double d2 = Math.Abs(-lo - squareCalculatedValue);
+            double d1 = -lo + squareCalculatedValue;
+            double d2 = -lo - squareCalculatedValue;
             double d = Math.Min(d1, d2);
-
-            Vector3D FastestCollisionLength = d * VelocityDirectionNormalized;
-
-            // the last escape, collision would happen, but in next frames
-            if (FastestCollisionLength.LengthSquared > totalDisplacement.LengthSquared)
-            {
-                return test;
-            }
 
             test = new CollisionResponse(
                         (float) d,
-                        scenario.Linear.StartingPosition + FastestCollisionLength
+                        scenario.Linear.StartingPosition + d * totalDisplacement
                       );
 
             return test;

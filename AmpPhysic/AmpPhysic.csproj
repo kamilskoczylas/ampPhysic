@@ -50,6 +50,7 @@
     <Compile Include="Collision\CollisionResponser.cs" />
     <Compile Include="Collision\CollisionSimplifiedScenario.cs" />
     <Compile Include="Collision\Combinations\PointPointCollision.cs" />
+    <Compile Include="Collision\Combinations\SphereSphereCollision.cs" />
     <Compile Include="Collision\Combinations\SpherePointCollision.cs" />
     <Compile Include="Collision\FastestCollision.cs" />
     <Compile Include="Collision\PossibleCollisionsGroup.cs" />

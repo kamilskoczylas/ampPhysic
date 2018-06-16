@@ -126,11 +126,11 @@ namespace AmpPhysicTests
         }
 
         [Given(@"A sphere in position \((.*), (.*), (.*)\) and radius (.*) and point in position \((.*), (.*), (.*)\)")]
-        public void GivenASphereInPositionAndRadiusAndPointInPosition(int p0, int p1, int p2, int p3, int p4, int p5, int p6)
+        public void GivenASphereInPositionAndRadiusAndPointInPosition(int p0, int p1, int p2, float p3, int p4, int p5, int p6)
         {
             Context.World.RemoveObjects();
 
-            var bodyA = Context.CreateGameObject();
+            var bodyA = Context.CreateSphere(1, p3);
             var bodyB = Context.CreateGameObject();
 
             bodyA.SetPosition(p0, p1, p2);

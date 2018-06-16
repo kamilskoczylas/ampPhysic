@@ -156,11 +156,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 38
 this.ScenarioSetup(scenarioInfo);
 #line 39
- testRunner.Given("A sphere in position (0, 0, 0) and radius 2 and point in position (10, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("A sphere in position (0, 0, 0) and radius 1.99 and point in position (10, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 40
  testRunner.And("The bodyA velocity is (2, 0, 0) and bodyB velocity is (1, 0, 0)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 41
- testRunner.And("After 9 seconds nothing happens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("After 8 seconds nothing happens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 42
  testRunner.Then("After 2 seconds I should recive collision event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

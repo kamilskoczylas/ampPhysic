@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AmpPhysic.Collision.Shapes
 {
-    class PointColliderShape : ColliderShape
+    public class PointColliderShape : ColliderShape
     {
         public override float CalculateMaximumRadius {
             get

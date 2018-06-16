@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 
 namespace AmpPhysic.Collision.Shapes
 {
-    class SphereColliderShape : ColliderShape
-    {   
+    public class SphereColliderShape : ColliderShape
+    {
+        float Radius;
+
+        public SphereColliderShape(float R)
+        {
+            Radius = R;
+        }
+
         public override float CalculateMaximumRadius
         {
             get
             {
-                return 0.0f;
+                return Radius;
             }
 
         }

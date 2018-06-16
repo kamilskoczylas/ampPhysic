@@ -1,4 +1,5 @@
 ﻿using AmpPhysic;
+using AmpPhysic.Collision.Shapes;
 
 namespace AmpPhysicTests
 {
@@ -19,10 +20,10 @@ namespace AmpPhysicTests
             return RidgidBody;
         }
 
-        public GameObject CreateSphere(float mass = 1, int radius = 1, string ObjectName = "body")
+        public GameObject CreateSphere(float mass = 1, float radius = 1, string ObjectName = "body")
         {
             var RidgidBody = new GameObject(
-                new KinematicBody(mass)
+                new KinematicBody(mass, new SphereColliderShape(radius))
                 );
 
             World.AddObject(RidgidBody, ObjectName);
