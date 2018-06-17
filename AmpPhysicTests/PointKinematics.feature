@@ -36,7 +36,7 @@ Scenario: A point moves behind and very closely to another point with the same s
 
 
 Scenario: I should be notified when sphereA has collision with a point
-	Given A sphere in position (0, 0, 0) and radius 1.99 and point in position (10, 0, 0)
-	And The bodyA velocity is (2, 0, 0) and bodyB velocity is (1, 0, 0)
+	Given A sphere in position (0, 0, 0) and radius 1.99 and point in position (10, 10, 10)
+	And The bodyA velocity is (2, 2, 2) and bodyB velocity is (1, 1, 1)
 	And After 8 seconds nothing happens
 	Then After 2 seconds I should recive collision event

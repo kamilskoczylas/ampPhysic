@@ -87,6 +87,12 @@
       <DependentUpon>PointStatics.feature</DependentUpon>
     </Compile>
     <Compile Include="PointStaticsSteps.cs" />
+    <Compile Include="SphereKinematics.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SphereKinematics.feature</DependentUpon>
+    </Compile>
+    <Compile Include="SphereKinematicsSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -112,6 +118,10 @@
     <None Include="PointStatics.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>PointStatics.feature.cs</LastGenOutput>
+    </None>
+    <None Include="SphereKinematics.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SphereKinematics.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

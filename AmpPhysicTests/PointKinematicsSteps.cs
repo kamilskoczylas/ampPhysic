@@ -144,7 +144,7 @@ namespace AmpPhysicTests
         }
 
         [Then(@"After (.*) seconds I should recive collision event")]
-        public void ThenAfterSecondsIShouldReciveCollisionEvent(int p0)
+        public void ThenAfterSecondsIShouldReciveCollisionEvent(float p0)
         {
             bool testSucceded = false;            
 
@@ -162,7 +162,7 @@ namespace AmpPhysicTests
         }
 
         [Then(@"After (.*) seconds co collision should happen")]
-        public void ThenAfterSecondsCoCollisionShouldHappen(int p0)
+        public void ThenAfterSecondsCoCollisionShouldHappen(float p0)
         {
             bool testSucceded = true;
 
