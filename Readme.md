@@ -1,14 +1,13 @@
-This is a hobby & training project to imitate the static and dynamic of physic
+## Physic engine
+This is a hobby & training project to imitate physics for car racing game. 
+It detects collisions
 
-A cpu physic engine basis for simple games
-The goal is to use this engine for a car racing simple game
-
-Tests are based on SpecFlow.
-
+Gherkin tests are based on SpecFlow.
 
 ![Example in use](https://github.com/kamilskoczylas/ampPhysic/blob/master/3dcar-engine.png?raw=true)
 
 
+## Sample use of physic engine
 
     using System;
     using System.IO;
