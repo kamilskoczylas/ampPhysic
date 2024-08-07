@@ -6,9 +6,10 @@ The goal is to use this engine for a car racing simple game
 Tests are based on SpecFlow.
 
 
-![Example in use]([http://url/to/img.png](https://github.com/kamilskoczylas/ampPhysic/blob/master/3dcar-engine.png))
+![Example in use](https://github.com/kamilskoczylas/ampPhysic/blob/master/3dcar-engine.png?raw=true)
 
 '''
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -119,4 +120,5 @@ namespace AutoTest
         }
     }
 }
+
 '''
