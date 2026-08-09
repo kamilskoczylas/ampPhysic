@@ -1,6 +1,7 @@
-## Physic engine
+## Custom uncompleted physic engine
 This is a hobby & training project to imitate physics for car racing game. 
-It detects collisions
+It detects very basic collisions: points with triangles/planes and spheres
+
 
 Gherkin tests are based on SpecFlow.
 
